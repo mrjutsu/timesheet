@@ -2,16 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { SheetComponent } from './sheet/sheet.component';
 
-import { NgbTimePicker } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SheetComponent
   ],
   imports: [
     BrowserModule,
-    NgbTimePicker
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
