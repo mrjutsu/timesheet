@@ -1,1 +1,42 @@
-<!-- <ngb-timepicker></ngb-timepicker> -->
+<div class="row">
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="thead-dark">
+      <th scope="col">Date</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+      <th scope="col">Regular Hours</th>
+      <th scope="col">Total Hours</th>
+    </thead>
+    <tbody>
+      <tr>
+        <th>
+          <input type="text" ngbDatepicker #d="ngbDatepicker" class="form-control">
+        </th>
+        <th>
+          <ngb-timepicker [spinners]="false" [meridian]="true"></ngb-timepicker>
+        </th>
+        <th>
+          <ngb-timepicker [spinners]="false" [meridian]="true"></ngb-timepicker>
+        </th>
+        <th>
+          <input type="text" name="" value="" class="form-control">
+        </th>
+        <th>
+          <input type="text" name="" value="" class="form-control">
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row fixed-bottom">
+  <div class="col-sm"></div>
+  <div class="col-sm"></div>
+  <div class="col-sm">
+    <p class="lead">
+      <span>
+        <b>Total:</b>&nbsp;
+      </span>
+      <span class="text-muted">0</span>
+    </p>
+  </div>
+</div>
