@@ -30,16 +30,16 @@
             </div>
           </th>
           <th>
-            <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.start_time"></ngb-timepicker>
+            <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.start_time" (keyup)="calculateRow(row)"></ngb-timepicker>
           </th>
           <th>
-            <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.end_time"></ngb-timepicker>
+            <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.end_time" (keyup)="calculateRow(row)"></ngb-timepicker>
           </th>
           <!-- <th>
             <input type="number" class="form-control" [(ngModel)]="row.regular_hours">
           </th> -->
           <th>
-            <input type="number" class="form-control" [(ngModel)]="row.total_hours" disabled>
+            <input type="number" class="form-control" [(ngModel)]="row.hours" disabled>
           </th>
           <th>
             <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRow(i)" [disabled]="rows.length <= 1">
@@ -64,11 +64,11 @@
   <div class="col-sm"></div>
   <div class="col-sm"></div>
   <div class="col-sm">
-    <p class="lead">
+    <h2 class="">
       <span>
         <b>Total:</b>&nbsp;
       </span>
       <span class="text-muted">{{total_hours}}</span>
-    </p>
+    </h2>
   </div>
 </div>
