@@ -9,8 +9,8 @@ export class SheetComponent implements OnInit {
 
   rows = [
     { date: undefined,
-      start_time: undefined,
-      end_time: undefined,
+      start_time: { hour: 12, minute: 0 },
+      end_time: { hour: 12, minute: 0 },
       regular_hours: undefined,
       total_hours: undefined
     }
@@ -30,6 +30,21 @@ export class SheetComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addRow(): void {
+    let row = { date: undefined,
+      start_time: { hour: 12, minute: 0 },
+      end_time: { hour: 12, minute: 0 },
+      regular_hours: undefined,
+      total_hours: undefined
+    }
+
+    this.rows.push(row);
+  }
+
+  deleteRow(i: number){
+    this.rows.splice(i,1);
   }
 
 }
