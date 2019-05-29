@@ -7,6 +7,9 @@ import { Component, OnInit, Input, DoCheck } from '@angular/core';
 })
 export class SheetComponent implements OnInit, DoCheck {
 
+  now = moment();
+  maxDate = { day: this.now.toObject().date, month: this.now.toObject().months, year: this.now.toObject().years };
+
   rows: any = [
     { date: undefined,
       start_time: { hour: 12, minute: 0 },
@@ -39,19 +42,24 @@ export class SheetComponent implements OnInit, DoCheck {
 
       let diff: Number = end.diff(start,'hours',true);
       row.total_hours = diff;
-      if (diff % 1 == 0){
-        row.hours = row.total_hours;
-      }else{
-        row.hours = diff.toFixed(2);
+
+      if (diff > 0) {
+        if (diff % 1 == 0){
+          row.hours = row.total_hours;
+        }else{
+          row.hours = diff.toFixed(2);
+        }
+        this.calculateTime();
       }
-      this.calculateTime();
     }
   }
 
   calculateTime(){
     this.total_hours = 0;
     for (let row of this.rows) {
-      this.total_hours += row.total_hours;
+      if (row.total_hours) {
+        this.total_hours += row.total_hours;
+      }
     }
     this.total_hours = this.total_hours.toFixed(2);
   }
