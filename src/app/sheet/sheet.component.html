@@ -15,7 +15,7 @@
         <th scope="col">Date</th>
         <th scope="col">Start Time</th>
         <th scope="col">End Time</th>
-        <th scope="col">Regular Hours</th>
+        <!-- <th scope="col">Regular Hours</th> -->
         <th scope="col">Total Hours</th>
         <th scope="col"></th>
       </thead>
@@ -25,7 +25,7 @@
             <div class="input-group">
               <input type="text" placeholder="YYYY-MM-DD" [(ngModel)]="row.date" ngbDatepicker #d="ngbDatepicker" class="form-control">
               <div class="input-group-append">
-                <button type="button" class="btn btn-outline-secondary"><i class="fal fa-calendar-alt"></i></button>
+                <button type="button" class="btn btn-outline-secondary" (click)="d.toggle()"><i class="fal fa-calendar-alt"></i></button>
               </div>
             </div>
           </th>
@@ -35,11 +35,11 @@
           <th>
             <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.end_time"></ngb-timepicker>
           </th>
-          <th>
+          <!-- <th>
             <input type="number" class="form-control" [(ngModel)]="row.regular_hours">
-          </th>
+          </th> -->
           <th>
-            <input type="number" class="form-control" [(ngModel)]="row.total_hours">
+            <input type="number" class="form-control" [(ngModel)]="row.total_hours" disabled>
           </th>
           <th>
             <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteRow(i)" [disabled]="rows.length <= 1">
