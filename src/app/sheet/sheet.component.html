@@ -1,32 +1,55 @@
-<div class="row">
-  <table class="table table-bordered table-striped table-sm">
-    <thead class="thead-dark">
-      <th scope="col">Date</th>
-      <th scope="col">Start Time</th>
-      <th scope="col">End Time</th>
-      <th scope="col">Regular Hours</th>
-      <th scope="col">Total Hours</th>
-    </thead>
-    <tbody>
-      <tr>
-        <th>
-          <input type="text" ngbDatepicker #d="ngbDatepicker" class="form-control">
-        </th>
-        <th>
-          <ngb-timepicker [spinners]="false" [meridian]="true"></ngb-timepicker>
-        </th>
-        <th>
-          <ngb-timepicker [spinners]="false" [meridian]="true"></ngb-timepicker>
-        </th>
-        <th>
-          <input type="text" name="" value="" class="form-control">
-        </th>
-        <th>
-          <input type="text" name="" value="" class="form-control">
-        </th>
-      </tr>
-    </tbody>
-  </table>
+<div class="form-group"></div>
+<div class="row form-group">
+  <div class="col-4"></div>
+  <div class="col-4"></div>
+  <div class="col-4">
+    <button type="button" class="btn btn-outline-primary btn-block">
+      <i class="fal fa-plus"></i>&nbsp;Add Row
+    </button>
+  </div>
+</div>
+<div class="row form-group">
+  <div class="col-12">
+    <table class="table table-bordered table-striped table-sm">
+      <thead class="thead-dark">
+        <th scope="col">Date</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">Regular Hours</th>
+        <th scope="col">Total Hours</th>
+        <th scope="col"></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of rows">
+          <th>
+            <div class="input-group">
+              <input type="text" placeholder="YYYY-MM-DD" [(ngModel)]="row.date" ngbDatepicker #d="ngbDatepicker" class="form-control">
+              <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary"><i class="fal fa-calendar-alt"></i></button>
+              </div>
+            </div>
+          </th>
+          <th>
+            <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.start_time"></ngb-timepicker>
+          </th>
+          <th>
+            <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.end_time"></ngb-timepicker>
+          </th>
+          <th>
+            <input type="number" class="form-control" [(ngModel)]="row.regular_hours">
+          </th>
+          <th>
+            <input type="number" class="form-control" [(ngModel)]="row.total_hours">
+          </th>
+          <th>
+            <button type="button" class="btn btn-outline-danger btn-sm">
+              <i class="fal fa-trash-alt"></i>
+            </button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <div class="row fixed-bottom">
   <div class="col-sm"></div>
@@ -36,7 +59,7 @@
       <span>
         <b>Total:</b>&nbsp;
       </span>
-      <span class="text-muted">0</span>
+      <span class="text-muted">{{total_hours}}</span>
     </p>
   </div>
 </div>

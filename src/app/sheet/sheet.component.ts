@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sheet',
@@ -6,6 +6,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sheet.component.css']
 })
 export class SheetComponent implements OnInit {
+
+  rows = [
+    { date: undefined,
+      start_time: undefined,
+      end_time: undefined,
+      regular_hours: undefined,
+      total_hours: undefined
+    }
+  ];
+
+  total_hours = 0;
+
+  // @Input() rows = [
+  //   { date: undefined,
+  //     start_time: undefined,
+  //     end_time: undefined,
+  //     regular_hours: undefined,
+  //     total_hours: undefined
+  //   }
+  // ];
 
   constructor() { }
 
