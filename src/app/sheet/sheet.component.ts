@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-sheet',
   templateUrl: './sheet.component.html',
@@ -44,7 +46,7 @@ export class SheetComponent implements OnInit, DoCheck {
       row.total_hours = diff;
 
       if (diff > 0) {
-        if (diff % 1 == 0){
+        if (diff as any % 1 == 0){
           row.hours = row.total_hours;
         }else{
           row.hours = diff.toFixed(2);
