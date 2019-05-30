@@ -23,7 +23,7 @@
         <tr *ngFor="let row of rows; index as i">
           <th>
             <div class="input-group">
-              <input type="text" placeholder="YYYY-MM-DD" [(ngModel)]="row.date" ngbDatepicker #d="ngbDatepicker" [maxDate]="maxDate" class="form-control">
+              <input id="date-input" type="text" placeholder="YYYY-MM-DD" [(ngModel)]="row.date" ngbDatepicker #d="ngbDatepicker" [maxDate]="maxDate" class="form-control">
               <div class="input-group-append">
                 <button type="button" class="btn btn-outline-secondary" (click)="d.toggle()"><i class="fal fa-calendar-alt"></i></button>
               </div>

@@ -1,0 +1,21 @@
+#date-input {
+  display: none;
+}
+
+@media (min-width: 576px) {
+  #date-input {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  #date-input {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  #date-input {
+    display: inline-block;
+  }
+}
