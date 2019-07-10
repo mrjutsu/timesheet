@@ -18,7 +18,8 @@ export class SheetComponent implements OnInit, DoCheck {
       end_time: { hour: 12, minute: 0 },
       regular_hours: undefined,
       total_hours: undefined,
-      hours: ''
+      hours: '',
+      valid_date: true
     }
   ];
 
@@ -31,9 +32,25 @@ export class SheetComponent implements OnInit, DoCheck {
 
   ngDoCheck(){
     for (let row of this.rows) {
-      if (row.date && row.start_time && row.end_time){
+      if (row.date) {
+        this.checkDate(row);
+      }
+      if (row.start_time && row.end_time){
         this.calculateRow(row);
       }
+    }
+  }
+
+  checkDate(row){
+    let regex = /([0-9])\w+/g;
+
+    let d = row.date.match(/\d+/g);
+
+    if (d.length >= 2) {
+      row.valid_date = moment(row.date,'MM-DD-YYYY').isValid();
+      console.log(row.valid_date);
+    }else{
+      row.valid_date = true;
     }
   }
 
@@ -71,7 +88,13 @@ export class SheetComponent implements OnInit, DoCheck {
       start_time: { hour: 12, minute: 0 },
       end_time: { hour: 12, minute: 0 },
       regular_hours: undefined,
-      total_hours: undefined
+      total_hours: undefined,
+      hours: '',
+      valid_date: true
+    }
+
+    if (this.rows[this.rows.length - 1].date) {
+      row.date = this.rows[this.rows.length - 1].date;
     }
 
     this.rows.push(row);

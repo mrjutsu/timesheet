@@ -13,19 +13,16 @@
         <th scope="col">Date</th>
         <th scope="col">Start Time</th>
         <th scope="col">End Time</th>
-        <!-- <th scope="col">Regular Hours</th> -->
         <th scope="col">Total Hours</th>
         <th scope="col"></th>
       </thead>
       <tbody>
         <tr *ngFor="let row of rows; index as i">
           <th>
-            <div class="input-group">
-              <input id="date-input" type="text" placeholder="YYYY-MM-DD" [(ngModel)]="row.date" ngbDatepicker #d="ngbDatepicker" [maxDate]="maxDate" [container]="body" class="form-control">
-              <div class="input-group-append">
-                <button type="button" class="btn btn-outline-secondary" (click)="d.toggle()"><i class="fal fa-calendar-alt"></i></button>
-              </div>
-            </div>
+            <input type="text" placeholder="MM-DD-YYYY" [(ngModel)]="row.date" class="form-control">
+            <p class="text-center text-danger m-0" *ngIf="!row.valid_date">
+              <small>Invalid Date</small>
+            </p>
           </th>
           <th>
             <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.start_time" (keyup)="calculateRow(row)"></ngb-timepicker>
@@ -33,9 +30,6 @@
           <th>
             <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.end_time" (keyup)="calculateRow(row)"></ngb-timepicker>
           </th>
-          <!-- <th>
-            <input type="number" class="form-control" [(ngModel)]="row.regular_hours">
-          </th> -->
           <th>
             <input type="number" class="form-control" [(ngModel)]="row.hours" disabled>
           </th>
@@ -57,8 +51,6 @@
   </div>
 </div>
 <div class="row">
-  <!-- <div class="col-sm"></div>
-  <div class="col-sm"></div> -->
   <div class="col-sm">
     <h2 class="text-center">
       <span>
