@@ -12,18 +12,25 @@ export class SheetComponent implements OnInit, DoCheck {
   now = moment();
   maxDate = { day: this.now.toObject().date, month: this.now.toObject().months, year: this.now.toObject().years };
 
+  time_placeholders = ['12:34 A', '5:05 a', '10:15 am', '11:43 AM', '3:45 p', '7:23 P', '10:05 pm', '8:25 PM'];
+
   rows: any = [
     { date: undefined,
-      start_time: { hour: 12, minute: 0 },
-      end_time: { hour: 12, minute: 0 },
+      start_time: undefined,
+      end_time: undefined,
       regular_hours: undefined,
       total_hours: undefined,
       hours: '',
-      valid_date: true
+      valid_date: true,
+      valid_start: true,
+      valid_end: true,
+      start_placeholder: this.timePlaceholder(),
+      end_placeholder: this.timePlaceholder()
     }
   ];
 
   total_hours: any = 0;
+
 
   constructor() { }
 
@@ -35,7 +42,7 @@ export class SheetComponent implements OnInit, DoCheck {
       if (row.date) {
         this.checkDate(row);
       }
-      if (row.start_time && row.end_time){
+      if ( row.start_time || row.end_time ){
         this.calculateRow(row);
       }
     }
@@ -48,16 +55,24 @@ export class SheetComponent implements OnInit, DoCheck {
 
     if (d.length >= 2) {
       row.valid_date = moment(row.date,'MM-DD-YYYY').isValid();
-      console.log(row.valid_date);
     }else{
       row.valid_date = true;
     }
   }
 
   calculateRow(row){
-    if (row.date && row.start_time && row.end_time) {
-      let start = moment({ year: row.date.year, month: row.date.month, day: row.date.day, hour: row.start_time.hour, minute: row.start_time.minute});
-      let end = moment({ year: row.date.year, month: row.date.month, day: row.date.day, hour: row.end_time.hour, minute: row.end_time.minute});
+    if (!row.date) {
+      let start = moment('1-1-19 ' + row.start_time, 'MM-DD-YYYY LT');
+      let end = moment('1-1-19 ' + row.end_time, 'MM-DD-YYYY LT');
+
+      row.valid_start = moment(start,'MM-DD-YYYY LT').isValid();
+      row.valid_end = moment(end,'MM-DD-YYYY LT').isValid();
+    } else {
+      let start = moment(row.date + ' ' + row.start_time, 'MM-DD-YYYY LT');
+      let end = moment(row.date + ' ' + row.end_time, 'MM-DD-YYYY LT');
+
+      row.valid_start = moment(start,'MM-DD-YYYY LT').isValid();
+      row.valid_end = moment(end,'MM-DD-YYYY LT').isValid();
 
       let diff: Number = end.diff(start,'hours',true);
       row.total_hours = diff;
@@ -83,14 +98,22 @@ export class SheetComponent implements OnInit, DoCheck {
     this.total_hours = this.total_hours.toFixed(2);
   }
 
+  timePlaceholder(){
+     return this.time_placeholders[Math.floor(Math.random() * this.time_placeholders.length)];
+  }
+
   addRow(): void {
     let row = { date: undefined,
-      start_time: { hour: 12, minute: 0 },
-      end_time: { hour: 12, minute: 0 },
+      start_time: undefined,
+      end_time: undefined,
       regular_hours: undefined,
       total_hours: undefined,
       hours: '',
-      valid_date: true
+      valid_date: true,
+      valid_start: true,
+      valid_end: true,
+      start_placeholder: this.timePlaceholder(),
+      end_placeholder: this.timePlaceholder()
     }
 
     if (this.rows[this.rows.length - 1].date) {

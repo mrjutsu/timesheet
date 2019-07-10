@@ -25,10 +25,16 @@
             </p>
           </th>
           <th>
-            <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.start_time" (keyup)="calculateRow(row)"></ngb-timepicker>
+            <input type="text" placeholder="{{row.start_placeholder}}" class="form-control" [(ngModel)]="row.start_time">
+            <p class="text-center text-danger m-0" *ngIf="!row.valid_start">
+              <small>Invalid Time</small>
+            </p>
           </th>
           <th>
-            <ngb-timepicker [spinners]="false" [meridian]="true" [size]="small" [(ngModel)]="row.end_time" (keyup)="calculateRow(row)"></ngb-timepicker>
+            <input type="text" placeholder="{{row.end_placeholder}}" class="form-control" [(ngModel)]="row.end_time">
+            <p class="text-center text-danger m-0" *ngIf="!row.valid_end">
+              <small>Invalid Time</small>
+            </p>
           </th>
           <th>
             <input type="number" class="form-control" [(ngModel)]="row.hours" disabled>
